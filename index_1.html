@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kan Web · Páginas web para comercios de Uruguay</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ff4a1f'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Arial Black,Arial,sans-serif' font-weight='900' font-size='42' fill='%2318191b'%3EK%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Kan hace páginas web para comercios de barrio en Uruguay: almacenes, pet shops, peluquerías y talleres, con WhatsApp a un toque.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+<!-- =========================================================
+     TUS DATOS: cambiá SOLO esto y se actualiza toda la página
+     ========================================================= -->
+<script>
+  const MIS_DATOS = {
+    nombre:   "Kan",
+    marca:    "Kan Web",            // el nombre de tu web (logo y pie)
+    email:    "kannnnzzzi@gmail.com",
+    telefono: "092 240 211",      // como se muestra en la página
+    whatsapp: "59892240211"       // 598 + tu número SIN el 0 inicial, sin espacios
+  };
+  document.documentElement.classList.add("js");
+</script>
+
+<style>
+/* ============ Tokens ============ */
+:root {
+  --bg: #18191b;
+  --surface: #222427;
+  --ink: #eff0f1;
+  --muted: #a3a5aa;
+  --accent: #ff4a1f;
+  --accent-ink: #18191b;
+  --field: #eff0f1;
+  --field-ink: #18191b;
+  --field-muted: #55585e;
+
+  --display: "Libre Franklin", "Arial Black", Arial, sans-serif;
+  --text: "Source Serif 4", Georgia, serif;
+
+  --step-small: clamp(0.875rem, 0.84rem + 0.1vw, 0.9375rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2.25rem, 1.3rem + 3.6vw, 4.5rem);
+
+  --margin: clamp(16px, 2vw, 28px);
+  --radius: 14px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--text); font-size: var(--step-body); line-height: 1.55;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+a { color: inherit; }
+img, svg { display: block; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: -0.035em; line-height: 0.95; }
+.wrap { padding-inline: var(--margin); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ============ Cursor (un círculo, sin estela) ============ */
+.cursor {
+  position: fixed; left: 0; top: 0; z-index: 100; pointer-events: none;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--accent); border: 1.5px solid var(--bg);
+  opacity: 0; transition: width 240ms var(--ease-out), height 240ms var(--ease-out), opacity 180ms ease, background-color 180ms ease;
+}
+.cursor.on { opacity: 1; }
+.cursor.grande { width: 56px; height: 56px; background: rgba(255, 74, 31, .3); border-color: var(--accent); }
+@media (hover: none), (pointer: coarse) { .cursor { display: none; } }
+
+/* ============ Botones y links ============ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 0 26px; border-radius: 999px; border: 0;
+  background: var(--accent); color: var(--accent-ink);
+  font: 700 1rem/1 var(--display); letter-spacing: -0.01em; text-decoration: none; cursor: pointer;
+  transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+}
+.btn svg { transition: transform 240ms var(--ease-out); }
+.btn:active { transform: scale(0.97); box-shadow: none; } /* taste-skill-ignore: sombra desplazada solo al pasar el mouse, pedida por el cliente */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { transform: translate(-4px, -4px); box-shadow: 4px 4px 0 var(--ink); } /* taste-skill-ignore: sombra desplazada solo al pasar el mouse, pedida por el cliente */
+  .btn:hover svg { transform: translateX(3px) rotate(-45deg); }
+  .btn:active { transform: scale(0.97); box-shadow: none; } /* taste-skill-ignore: sombra desplazada solo al pasar el mouse, pedida por el cliente */
+}
+@media (hover: hover) and (pointer: fine) {
+  .on-field .btn:hover { box-shadow: 4px 4px 0 var(--field-ink); } /* taste-skill-ignore: sombra desplazada solo al pasar el mouse, pedida por el cliente */
+}
+.link {
+  text-decoration: underline; text-decoration-thickness: 0.07em; text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  transition: text-decoration-color 180ms ease, color 180ms ease;
+}
+@media (hover: hover) and (pointer: fine) { .link:hover { text-decoration-color: currentColor; color: var(--accent); } }
+
+/* ============ Barra superior ============ */
+.barra-top { height: 8px; background: var(--accent); }
+.top {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding-block: 22px; font-size: var(--step-small);
+}
+.marca { font-family: var(--display); font-weight: 800; font-size: 1.25rem; letter-spacing: -0.03em; text-decoration: none; }
+.top nav { display: flex; gap: 28px; }
+.top nav a { text-decoration: none; position: relative; }
+.top nav a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: var(--accent);
+  transform: scaleX(0); transform-origin: right; transition: transform 300ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) { .top nav a:hover::after { transform: scaleX(1); transform-origin: left; } }
+
+/* ============ Hero: la oración ============ */
+.hero { min-height: calc(100svh - 8px - 76px); display: flex; flex-direction: column; justify-content: center; padding-block: 40px 56px; }
+.oracion {
+  font-size: clamp(64px, 11.2vw, 200px); text-transform: uppercase; line-height: 0.92; letter-spacing: -0.045em;
+}
+.oracion .l1 { display: flex; align-items: center; gap: 0.18em; }
+.oracion .l2 { display: block; margin-top: 0.06em; }
+.tira {
+  flex: 1; height: 0.78em; border-radius: var(--radius); overflow: hidden; position: relative;
+  background: var(--surface);
+}
+.tira .sitio { position: absolute; inset: 0; }
+.bajada {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: end; margin-top: 48px;
+}
+.bajada p { font-size: var(--step-lead); line-height: 1.35; max-width: 34ch; }
+.bajada p strong { font-weight: 600; }
+
+/* ---- Mini sitios de ejemplo (fragmentos de interfaz reales) ---- */
+.sitio {
+  display: flex; align-items: center; justify-content: space-between; gap: 3%;
+  padding: 0 3% 0 3.4%; font-size: 16px; letter-spacing: 0; text-transform: none; line-height: 1.2;
+  background: var(--sb); color: var(--si);
+  opacity: 0; transform: scale(1.04); transition: opacity 600ms ease, transform 1200ms var(--ease-soft);
+}
+.sitio.activo { opacity: 1; transform: none; }
+.s-marca { display: flex; align-items: center; gap: clamp(12px, 1.4vw, 22px); min-width: 0; }
+.s-logo { flex: none; width: clamp(48px, 5.6vw, 86px); aspect-ratio: 1; border-radius: 50%; background: var(--sa); display: grid; place-items: center; }
+.s-logo svg { width: 60%; height: 60%; }
+.s-txt { display: block; min-width: 0; }
+.s-nombre { display: block; font: 800 clamp(22px, 2.9vw, 50px)/0.95 var(--display); letter-spacing: -0.035em; white-space: nowrap; }
+.s-sub { display: block; font: 400 clamp(11px, 0.95vw, 15px)/1.2 var(--text); margin-top: 5px; opacity: .9; }
+.s-btns { display: flex; gap: 8px; margin-top: 10px; }
+.s-wpp, .s-ver { font: 700 clamp(10px, 0.82vw, 13px)/1 var(--display); padding: 8px 13px; border-radius: 999px; white-space: nowrap; letter-spacing: -0.01em; }
+.s-wpp { background: #25d366; color: #0b2e17; }
+.s-ver { box-shadow: inset 0 0 0 1.5px currentColor; } /* taste-skill-ignore: borde de un botón dentro del fragmento de interfaz */
+.s-prods { display: flex; gap: clamp(8px, 0.8vw, 12px); flex: none; }
+.s-prod { width: clamp(80px, 7.4vw, 118px); background: #ffffff; color: #18191b; border-radius: 12px; padding: 7px; display: flex; flex-direction: column; gap: 3px; }
+.s-prod svg { width: 100%; height: clamp(30px, 3.3vw, 50px); background: #f3f1ee; border-radius: 8px; padding: 4px; }
+.s-pn { font: 600 clamp(10px, 0.75vw, 12px)/1.15 var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.s-pp { font: 800 clamp(11px, 0.85vw, 13px)/1 var(--display); }
+.s-ej { position: absolute; top: 7px; right: 12px; font: 400 10px/1 var(--text); opacity: .65; }
+@media (max-width: 1080px) and (min-width: 721px) { .s-prods, .s-btns, .s-sub { display: none; } }
+
+/* ============ Cintas inclinadas y cruzadas ============ */
+.cintas { position: relative; height: 230px; overflow: hidden; }
+.cinta {
+  position: absolute; left: -6%; width: 112%; top: 50%; padding: 18px 0;
+  white-space: nowrap; overflow: hidden; font-family: var(--display); font-weight: 700;
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.9rem); letter-spacing: -0.02em;
+}
+.cinta.a { background: var(--accent); color: var(--accent-ink); transform: translateY(-50%) rotate(-4deg); z-index: 2; }
+.cinta.b { background: var(--field); color: var(--field-ink); transform: translateY(-50%) rotate(3deg); z-index: 1; }
+.pista { display: inline-flex; gap: 26px; align-items: center; animation: correr 32s linear infinite; }
+.cinta.b .pista { animation-direction: reverse; animation-duration: 38s; }
+.pista i { font-style: normal; }
+@media (hover: hover) { .cintas:hover .pista { animation-play-state: paused; } }
+@keyframes correr { to { transform: translateX(-50%); } }
+
+/* ============ Secciones ============ */
+.sec { padding-block: clamp(96px, 12vw, 200px); }
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; }
+
+/* ---- Probala: objeto delante del texto + lo vivo ---- */
+.probala { position: relative; overflow: hidden; }
+.pila { font-size: clamp(64px, 9vw, 150px); line-height: 0.88; text-transform: none; white-space: nowrap; position: relative; z-index: 1; }
+.pila .tenue { color: var(--muted); }
+.pila span { display: inline-block; }
+.telefono {
+  position: absolute; z-index: 2; right: 7vw; top: clamp(60px, 7vw, 110px);
+  width: clamp(250px, 23vw, 330px); aspect-ratio: 9 / 18.5; border-radius: 40px; padding: 12px;
+  background: #0d0e0f; transform: rotate(5deg);
+  transition: transform 600ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) { .telefono:hover { transform: rotate(2deg) translateY(-6px); } }
+.pantalla {
+  height: 100%; border-radius: 30px; overflow: hidden; display: flex; flex-direction: column;
+  background: #fff; color: #18191b; font-family: var(--text); font-size: 13px; line-height: 1.35;
+}
+.p-cab { padding: 30px 16px 18px; transition: background-color 400ms ease, color 400ms ease; }
+.p-nav { display: flex; justify-content: space-between; align-items: center; font: 700 11px/1 var(--display); margin-bottom: 18px; }
+.p-logo { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; transition: background-color 400ms ease; }
+.p-logo svg { width: 22px; height: 22px; }
+.p-nombre { font: 800 28px/0.95 var(--display); letter-spacing: -0.04em; word-break: break-word; }
+.p-tag { margin-top: 6px; font-size: 12.5px; opacity: .9; }
+.p-wpp { margin-top: 14px; padding: 11px; border-radius: 999px; text-align: center; background: #25d366; color: #0b2e17; font: 700 12.5px/1 var(--display); }
+.p-tit { font: 700 13px/1 var(--display); padding: 16px 16px 10px; }
+.p-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; padding: 0 16px; flex: 1; align-content: start; }
+.p-card { background: #f3f1ee; border-radius: 12px; padding: 8px; display: flex; flex-direction: column; gap: 3px; font-size: 11.5px; line-height: 1.2; }
+.p-card svg { width: 100%; height: 48px; background: #ffffff; border-radius: 8px; padding: 5px; margin-bottom: 3px; }
+.p-card b { font: 800 12px/1 var(--display); }
+.p-horario { margin: 10px 16px 18px; padding: 9px 11px; border-radius: 10px; background: #f3f1ee; font-size: 11.5px; }
+.cambia { animation: cambio 500ms var(--ease-out); }
+@keyframes cambio { from { opacity: .3; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.control { margin-top: 64px; position: relative; z-index: 3; }
+.control .grid > div { grid-column: 1 / span 6; }
+.control p { margin-bottom: 26px; max-width: 46ch; }
+.campo label { display: block; font: 700 1rem/1.2 var(--display); letter-spacing: -0.01em; margin-bottom: 10px; }
+.campo input {
+  width: 100%; font: 400 var(--step-lead)/1.2 var(--text); color: var(--ink);
+  background: var(--surface); border: 2px solid transparent; border-radius: var(--radius); padding: 16px 18px;
+  transition: border-color 180ms ease;
+}
+.campo input:focus { outline: none; border-color: var(--accent); }
+.rubros { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0 30px; border: 0; }
+.rubros legend { font: 700 1rem/1.2 var(--display); letter-spacing: -0.01em; margin-bottom: 12px; }
+.rubro {
+  min-height: 46px; padding: 0 18px; border-radius: 999px; border: 2px solid var(--surface);
+  background: var(--surface); color: var(--ink); font: 600 1rem/1 var(--text); cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, transform 140ms var(--ease-out);
+}
+.rubro:active { transform: scale(0.96); }
+.rubro[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+@media (hover: hover) and (pointer: fine) { .rubro:hover { border-color: var(--ink); } }
+
+/* ---- Servicios: filas con imágenes al margen ---- */
+.servicios .intro { padding-block: 40px 0; }
+.servicios .grid { display: block; max-width: 1080px; margin-inline: auto; }
+.servicios .intro h2 { font-size: clamp(56px, 7.4vw, 128px); max-width: 12ch; text-align: center; margin-inline: auto; }
+.fila { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(40px, 6vw, 96px); align-items: center; margin-top: clamp(72px, 7vw, 112px); }
+.fila > .frag { justify-self: center; }
+.fila:nth-child(even) > .frag { order: -1; }
+.fila h3 { font-size: clamp(1.75rem, 1.2rem + 1.8vw, 3rem); margin-bottom: 14px; }
+.fila p { max-width: 36ch; }
+.frag { border-radius: var(--radius); overflow: hidden; font-family: var(--text); line-height: 1.3; }
+.frag-1 { width: 260px; aspect-ratio: 4 / 5; }
+.frag-2 { width: 330px; aspect-ratio: 3 / 2; }
+.frag-3 { width: 210px; aspect-ratio: 1; }
+.frag-4 { width: 300px; aspect-ratio: 4 / 3; }
+
+.f-vidriera { background: #1f4d3a; color: #ece9e2; padding: 18px; display: flex; flex-direction: column; gap: 12px; height: 100%; }
+.fv-top { display: flex; align-items: center; gap: 10px; }
+.fv-logo { width: 38px; height: 38px; border-radius: 50%; background: #f2c14e; display: grid; place-items: center; flex: none; }
+.fv-logo svg { width: 24px; height: 24px; }
+.fv-top b { font: 800 22px/0.95 var(--display); letter-spacing: -0.035em; }
+.f-vidriera .abierto { font: 700 12px/1 var(--display); background: #ece9e2; color: #1f4d3a; padding: 7px 10px 7px 22px; border-radius: 999px; align-self: flex-start; position: relative; }
+.f-vidriera .abierto::before { content: ""; position: absolute; left: 9px; top: 50%; width: 7px; height: 7px; margin-top: -3.5px; border-radius: 50%; background: #25d366; }
+.fv-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: auto; }
+.fv-p { background: #ffffff; color: #18191b; border-radius: 10px; padding: 7px; display: flex; flex-direction: column; gap: 2px; font-size: 12px; line-height: 1.15; }
+.fv-p svg { width: 100%; height: 42px; background: #f3f1ee; border-radius: 7px; padding: 4px; margin-bottom: 2px; }
+.fv-p b { font: 800 12px/1 var(--display); }
+
+.f-pantallas { background: var(--surface); height: 100%; display: flex; align-items: flex-end; justify-content: center; gap: 14px; padding: 22px 22px 0; }
+.f-pantallas .pc, .f-pantallas .cel { display: flex; flex-direction: column; background: #ffffff; color: #18191b; overflow: hidden; }
+.f-pantallas .pc { width: 64%; height: 82%; border-radius: 10px 10px 0 0; }
+.f-pantallas .cel { width: 23%; height: 94%; border-radius: 16px 16px 0 0; padding: 8px 6px 0; gap: 5px; align-items: center; background: #ffd23f; }
+.f-pantallas .cel > b { font: 800 11px/1 var(--display); }
+.barra { display: flex; gap: 4px; padding: 6px 8px; background: #e7e5e1; }
+.barra i { width: 6px; height: 6px; border-radius: 50%; background: #b9b6b0; }
+.mini-cab { display: flex; align-items: center; gap: 7px; background: #ffd23f; padding: 10px; }
+.f-pantallas .cel .mini-cab { padding: 0; background: none; }
+.mini-cab b { font: 800 15px/0.95 var(--display); letter-spacing: -0.03em; }
+.mini-logo { width: 26px; height: 26px; border-radius: 50%; background: #ffffff; display: grid; place-items: center; flex: none; }
+.mini-logo svg { width: 16px; height: 16px; }
+.mini-prods { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 8px; }
+.f-pantallas .cel .mini-prods { grid-template-columns: 1fr; padding: 0; width: 100%; }
+.mini-prods span { background: #f3f1ee; border-radius: 6px; padding: 4px; }
+.mini-prods svg { width: 100%; height: 30px; }
+
+.f-chat { height: 100%; display: flex; flex-direction: column; font-size: 12px; color: #18191b; }
+.fc-cab { display: flex; align-items: center; gap: 8px; background: #075e54; color: #ffffff; padding: 9px 10px; }
+.fc-cab b { display: block; font: 700 12.5px/1.1 var(--display); }
+.fc-cab small { font-size: 10.5px; opacity: .8; }
+.fc-av { width: 28px; height: 28px; border-radius: 50%; background: #f4b6c2; display: grid; place-items: center; flex: none; }
+.fc-av svg { width: 18px; height: 18px; }
+.fc-cuerpo { flex: 1; background: #e8dfd4; padding: 10px; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; }
+.fc-cuerpo p { max-width: 86%; padding: 6px 8px 4px; border-radius: 9px; background: #ffffff; line-height: 1.25; }
+.fc-cuerpo p.yo { align-self: flex-end; background: #d6f5c7; }
+.fc-cuerpo small { display: block; text-align: right; font-size: 9.5px; color: #575b61; margin-top: 2px; }
+
+.f-cambio { background: var(--field); color: var(--field-ink); height: 100%; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+.fk-cab { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
+.fk-cab b { font: 800 17px/1 var(--display); letter-spacing: -0.02em; }
+.fk-cab .ok { font: 700 11px/1 var(--display); background: #d6f5c7; color: #0b5d2a; padding: 6px 9px; border-radius: 999px; }
+.f-cambio .fila-precio { display: grid; grid-template-columns: 30px 1fr auto; gap: 9px; align-items: center; padding: 7px 10px 7px 7px; background: #ffffff; border-radius: 10px; }
+.f-cambio .fila-precio svg { width: 30px; height: 30px; background: #f3f1ee; border-radius: 7px; padding: 3px; }
+.f-cambio s { color: var(--field-muted); }
+.f-cambio .nuevo { color: #b42d0b; font-weight: 600; }
+
+/* ---- Cómo trabajo: cuadrados en escalera ---- */
+.proceso h2 { font-size: clamp(56px, 7.4vw, 128px); max-width: 12ch; margin-bottom: 72px; }
+.pasos { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.paso {
+  background: var(--surface); border-radius: 22px; padding: 40px 28px 36px; text-align: center;
+  transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out), background-color 240ms ease;
+}
+.paso:nth-child(2) { margin-top: 48px; }
+.paso:nth-child(3) { margin-top: 96px; }
+.paso:nth-child(4) { margin-top: 144px; }
+.paso .n { display: block; font: 800 clamp(64px, 6vw, 96px)/1 var(--display); letter-spacing: -0.05em; color: var(--accent); margin-bottom: 18px; transition: transform 300ms var(--ease-out); }
+.paso h3 { font-size: 1.6rem; margin-bottom: 10px; }
+.paso p { color: var(--muted); }
+@media (hover: hover) and (pointer: fine) {
+  .paso:hover { transform: translate(-6px, -6px); box-shadow: 6px 6px 0 var(--accent); } /* taste-skill-ignore: sombra desplazada solo al pasar el mouse, pedida por el cliente */
+  .paso:hover .n { transform: scale(1.08); }
+}
+
+/* ---- Precio: la oferta como oración ---- */
+.precio { background: var(--field); color: var(--field-ink); min-height: 80svh; display: flex; flex-direction: column; justify-content: center; }
+.precio h2 { font-size: clamp(56px, 8.4vw, 150px); line-height: 0.98; text-transform: none; }
+.bloque { display: inline-block; background: var(--accent); color: var(--accent-ink); padding: 0 0.15em; border-radius: 0.12em; }
+.precio .pie-precio { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: end; margin-top: 64px; }
+.precio .pie-precio p { grid-column: 1 / span 6; font-size: var(--step-lead); line-height: 1.35; }
+.precio .pie-precio .btn { grid-column: 10 / span 3; justify-self: end; }
+.planes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 88px; align-items: stretch; }
+.plan {
+  background: #ffffff; color: var(--field-ink); border-radius: 18px; padding: 34px 30px 30px;
+  display: flex; flex-direction: column; box-shadow: inset 0 0 0 2px var(--field-ink); /* taste-skill-ignore: borde de la tarjeta, estilo pedido por el cliente */
+  transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out);
+}
+.plan h3 { font-size: clamp(1.9rem, 1.4rem + 1.2vw, 2.6rem); }
+.plan .p-precio { color: var(--field-muted); margin: 6px 0 24px; }
+.plan ul { list-style: none; flex: 1; margin-bottom: 30px; }
+.plan li { display: flex; gap: 10px; padding: 7px 0; }
+.plan li::before { content: "→"; color: #b42d0b; font-weight: 600; }
+.plan .btn { align-self: stretch; }
+.btn-claro { background: transparent; color: var(--field-ink); box-shadow: inset 0 0 0 2px var(--field-ink); } /* taste-skill-ignore: botón con borde */
+.plan.dest { background: var(--field-ink); color: var(--field); }
+.plan.dest .p-precio { color: #b4b6bb; }
+.plan.dest li::before { color: var(--accent); }
+.plan-cab { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.badge { background: var(--accent); color: var(--accent-ink); font: 700 13px/1 var(--display); padding: 8px 12px; border-radius: 999px; }
+@media (hover: hover) and (pointer: fine) {
+  .plan:hover { transform: translate(-6px, -6px); box-shadow: inset 0 0 0 2px var(--field-ink), 6px 6px 0 var(--field-ink); } /* taste-skill-ignore: sombra solo al pasar el mouse */
+  .plan.dest:hover { box-shadow: 6px 6px 0 var(--accent); } /* taste-skill-ignore: sombra solo al pasar el mouse */
+  .btn-claro:hover { background: var(--field-ink); color: var(--field); box-shadow: 4px 4px 0 var(--accent); } /* taste-skill-ignore: sombra solo al pasar el mouse */
+  .plan.dest .btn:hover { box-shadow: 4px 4px 0 var(--field); } /* taste-skill-ignore: sombra solo al pasar el mouse */
+}
+
+/* ---- Sobre mí: la inicial como capitular ---- */
+.sobre .texto { max-width: 1180px; margin-inline: auto; }
+.bio { max-width: 40ch; }
+.fuertes { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; max-width: 1180px; margin: clamp(56px, 5vw, 80px) auto 0; }
+.fuerte {
+  border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 10px;
+  transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out);
+}
+.fuerte b { font: 800 clamp(1.4rem, 1rem + 0.9vw, 1.9rem)/1 var(--display); letter-spacing: -0.03em; margin-top: 8px; }
+.fuerte > span:last-child { font-size: 1rem; line-height: 1.45; max-width: 34ch; }
+.f-ic { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; transition: transform 300ms var(--ease-out); }
+.f-ic svg { width: 22px; height: 22px; }
+.f1 { background: var(--accent); color: var(--accent-ink); }
+.f1 .f-ic { background: var(--accent-ink); color: var(--accent); }
+.f2 { background: var(--field); color: var(--field-ink); }
+.f2 .f-ic { background: #25d366; color: #0b2e17; }
+.f3 { background: var(--surface); color: var(--ink); }
+.f3 .f-ic { background: var(--ink); color: var(--bg); }
+@media (hover: hover) and (pointer: fine) {
+  .fuerte:hover { transform: translate(-6px, -6px) rotate(-0.6deg); box-shadow: 6px 6px 0 var(--ink); } /* taste-skill-ignore: sombra solo al pasar el mouse */
+  .f3:hover { box-shadow: 6px 6px 0 var(--accent); } /* taste-skill-ignore: sombra solo al pasar el mouse */
+  .fuerte:hover .f-ic { transform: rotate(-12deg) scale(1.08); }
+}
+.sobre h2 { font-size: var(--step-head); margin-bottom: 40px; }
+.bio { font-size: clamp(24px, 2.4vw, 36px); line-height: 1.22; }
+.bio + .bio { margin-top: 1.1em; color: var(--muted); }
+.cuerpo { display: grid; grid-template-columns: clamp(140px, 15vw, 220px) minmax(0, 1fr); gap: clamp(28px, 3.4vw, 56px); align-items: start; }
+.capitular {
+  aspect-ratio: 1; background: var(--accent); color: var(--accent-ink); border-radius: 18px;
+  display: grid; place-items: center; font: 800 clamp(72px, 8vw, 120px)/1 var(--display); letter-spacing: -0.05em;
+  transition: transform 400ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) { .capitular:hover { transform: rotate(-4deg); } }
+
+/* ---- Contacto: oración, sello y dos links ---- */
+.contacto .grid { align-items: start; }
+.contacto .frase { grid-column: 1 / span 5; font-size: clamp(24px, 2.3vw, 34px); line-height: 1.15; }
+.contacto h2 { font-size: var(--step-head); grid-column: 1 / -1; margin-bottom: 48px; }
+.sello { grid-column: 7 / span 2; width: 170px; height: 170px; position: relative; justify-self: center; }
+.sello > svg { width: 100%; height: 100%; animation: girar 18s linear infinite; }
+.sello .centro {
+  position: absolute; inset: 0; margin: auto; width: 64px; height: 64px; border-radius: 50%;
+  background: var(--accent); display: grid; place-items: center; transition: transform 300ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) { .sello:hover .centro { transform: rotate(-45deg) scale(1.1); } }
+@keyframes girar { to { transform: rotate(360deg); } }
+.vias { grid-column: 9 / span 4; }
+.vias h3 { font-size: 1.5rem; margin-bottom: 20px; }
+.vias a { display: block; font-size: var(--step-lead); margin-bottom: 12px; word-break: break-all; }
+.vias small { display: block; margin-top: 18px; color: var(--muted); font-size: var(--step-small); }
+
+/* ---- Pie: el nombre en grande ---- */
+.pie { background: var(--accent); color: var(--accent-ink); padding-top: 40px; overflow: hidden; }
+.pie .arriba { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; font-size: var(--step-small); }
+.pie .arriba p { max-width: 44ch; }
+.pie .mail { display: inline-block; margin-top: clamp(90px, 12vw, 180px); font: 700 clamp(28px, 4.6vw, 76px)/1 var(--display); letter-spacing: -0.04em; text-decoration: none; word-break: break-all; }
+@media (hover: hover) and (pointer: fine) { .pie .mail:hover { text-decoration: underline; text-decoration-thickness: 0.06em; text-underline-offset: 0.12em; } }
+.gigante {
+  font: 800 clamp(120px, 43vw, 760px)/0.78 var(--display); letter-spacing: -0.07em; text-transform: uppercase;
+  color: transparent; -webkit-text-stroke: 2px var(--accent-ink); white-space: nowrap; margin-top: 40px; margin-left: -0.04em;
+}
+.pie .abajo { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 22px; font-size: var(--step-small); }
+
+/* ============ Movimiento ============ */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-r] { opacity: 0; transform: translateY(24px); transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-expo); transition-delay: calc(var(--i, 0) * 80ms); }
+  .js [data-r].in { opacity: 1; transform: none; }
+  .js .tira.shutter { clip-path: inset(0 100% 0 0 round var(--radius)); transition: clip-path 1100ms var(--ease-in-out) 250ms; }
+  .js .tira.shutter.in { clip-path: inset(0 0 0 0 round var(--radius)); }
+  .js .oracion .palabra { display: inline-block; opacity: 0; transform: translateY(0.35em); transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-expo); }
+  .js .oracion.in .palabra { opacity: 1; transform: none; }
+  .js .oracion.in .l2 .palabra { transition-delay: 120ms; }
+  .js .telefono[data-r] { transform: rotate(5deg) translateY(40px); }
+  .js .telefono[data-r].in { transform: rotate(5deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pista, .sello > svg { animation: none; }
+  .sitio { transition: none; transform: none; }
+  .sitio:not(.activo) { display: none; }
+}
+
+/* ============ Tablet ============ */
+@media (max-width: 1080px) {
+  .planes, .fuertes { grid-template-columns: 1fr; }
+  .pasos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .paso:nth-child(n) { margin-top: 0; }
+  .paso:nth-child(even) { margin-top: 48px; }
+  .control .grid > div { grid-column: 1 / span 7; }
+  .telefono { right: 4vw; }
+}
+
+/* ============ Celular ============ */
+@media (max-width: 720px) {
+  .top nav a:not(:last-child) { display: none; }
+  .hero { min-height: auto; padding-block: 48px 64px; }
+  .oracion { font-size: 14.4vw; }
+  .oracion .l1 { flex-wrap: wrap; }
+  .tira { flex: 0 0 100%; height: auto; aspect-ratio: 2 / 1; order: 2; margin-block: 0.12em 0.1em; }
+  .sitio { flex-direction: column; align-items: stretch; justify-content: center; gap: 12px; padding: 0 16px; }
+  .s-logo { width: 46px; }
+  .s-nombre { font-size: 6.8vw; }
+  .s-sub { font-size: 12px; }
+  .s-btns, .s-pn { display: none; }
+  .s-prods { gap: 8px; }
+  .s-prod { flex: 1; width: auto; flex-direction: row; align-items: center; gap: 6px; padding: 5px; }
+  .s-prod svg { width: 30px; height: 30px; flex: none; padding: 3px; }
+  .bajada { grid-template-columns: 1fr; gap: 28px; margin-top: 32px; }
+  .bajada .btn { width: 100%; }
+  .cintas { height: 170px; }
+  .grid { column-gap: 0; }
+  .pila { font-size: 15vw; }
+  .telefono { position: relative; right: auto; top: auto; margin: 28px 0 0 auto; width: 74vw; max-width: 300px; }
+  .control { margin-top: 40px; }
+  .control .grid > div { grid-column: 1 / -1; }
+  .servicios .intro { padding-block: 0; }
+  .servicios .intro h2 { font-size: 13vw; }
+  .servicios .intro h2 { text-align: left; margin-inline: 0; }
+  .fila { grid-template-columns: 1fr; gap: 24px; margin-top: 64px; }
+  .fila:nth-child(even) > .frag { order: 0; }
+  .fila > .frag { justify-self: start; }
+  .frag-1 { width: 70%; } .frag-2 { width: 100%; } .frag-3 { width: 55%; } .frag-4 { width: 80%; }
+  .proceso h2 { font-size: 13vw; margin-bottom: 40px; }
+  .pasos { grid-template-columns: 1fr; gap: 14px; }
+  .paso:nth-child(n) { margin-top: 0; margin-left: calc((var(--k) ) * 6vw); }
+  .paso:nth-child(1) { --k: 0; } .paso:nth-child(2) { --k: 1; } .paso:nth-child(3) { --k: 2; } .paso:nth-child(4) { --k: 3; }
+  .paso { padding: 28px 22px; text-align: left; display: grid; grid-template-columns: auto 1fr; column-gap: 18px; align-items: center; }
+  .paso .n { grid-row: span 2; margin: 0; font-size: 64px; }
+  .paso h3 { margin-bottom: 4px; }
+  .precio h2 { font-size: 10vw; }
+  .precio .pie-precio { grid-template-columns: 1fr; gap: 24px; margin-top: 40px; }
+  .precio .pie-precio p, .precio .pie-precio .btn { grid-column: 1; justify-self: stretch; }
+  .planes { grid-template-columns: 1fr; margin-top: 56px; }
+  .plan { padding: 28px 22px 24px; }
+  .fuertes { grid-template-columns: 1fr; gap: 14px; margin-top: 48px; }
+  .fuerte { padding: 22px; }
+  .bio { font-size: 22px; line-height: 1.25; }
+  .cuerpo { grid-template-columns: 1fr; gap: 24px; }
+  .capitular { width: 96px; font-size: 56px; border-radius: 14px; }
+  .contacto .frase { grid-column: 1 / -1; font-size: 22px; margin-bottom: 40px; }
+  .sello { grid-column: 1 / span 4; width: 104px; height: 104px; justify-self: start; }
+  .sello .centro { width: 42px; height: 42px; }
+  .vias { grid-column: 5 / -1; }
+  .vias a { font-size: 1.05rem; }
+  .gigante { font-size: 40vw; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pan" viewBox="0 0 48 48"><path d="M7 27c0-9 7.6-15 17-15s17 6 17 15v9a3 3 0 0 1-3 3H10a3 3 0 0 1-3-3z" fill="#e3a857"/><path d="M16 20l3 7M24 18v9M32 20l-3 7" stroke="#9c5d1e" stroke-width="2.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-queso" viewBox="0 0 48 48"><path d="M5 31 33 14l10 7v11H5z" fill="#f6c945"/><path d="M5 31h38v6H5z" fill="#e0ad2a"/><circle cx="17" cy="27" r="2.6" fill="#e0ad2a"/><circle cx="29" cy="23" r="2" fill="#e0ad2a"/><circle cx="35" cy="28" r="1.8" fill="#e0ad2a"/></symbol>
+  <symbol id="i-yerba" viewBox="0 0 48 48"><path d="M14 10l3-5h14l3 5z" fill="#1d5a36"/><rect x="13" y="10" width="22" height="33" rx="3" fill="#2f7d4a"/><rect x="13" y="20" width="22" height="11" fill="#f2d24b"/><path d="M19 25.5h10" stroke="#2f7d4a" stroke-width="2.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-botella" viewBox="0 0 48 48"><rect x="20.5" y="3" width="7" height="5" rx="1" fill="#d43c3c"/><path d="M21 8h6v6l4 5v23a3 3 0 0 1-3 3h-8a3 3 0 0 1-3-3V19l4-5z" fill="#3a8fd6"/><rect x="17" y="25" width="14" height="9" fill="#ffffff"/></symbol>
+  <symbol id="i-hueso" viewBox="0 0 48 48"><g fill="#d9c09a" transform="rotate(-30 24 24)"><circle cx="11" cy="19" r="5.5"/><circle cx="11" cy="29" r="5.5"/><circle cx="37" cy="19" r="5.5"/><circle cx="37" cy="29" r="5.5"/><rect x="10" y="19" width="28" height="10"/></g></symbol>
+  <symbol id="i-pata" viewBox="0 0 48 48"><g fill="#7a4a2b"><ellipse cx="24" cy="32" rx="9.5" ry="8"/><circle cx="12.5" cy="21" r="4.2"/><circle cx="19.5" cy="13.5" r="4.2"/><circle cx="28.5" cy="13.5" r="4.2"/><circle cx="35.5" cy="21" r="4.2"/></g></symbol>
+  <symbol id="i-lata" viewBox="0 0 48 48"><rect x="11" y="12" width="26" height="29" rx="3" fill="#e8613c"/><ellipse cx="24" cy="12" rx="13" ry="4" fill="#c9c9cc"/><rect x="11" y="20" width="26" height="12" fill="#ffffff"/><circle cx="24" cy="26" r="3.5" fill="#e8613c"/></symbol>
+  <symbol id="i-collar" viewBox="0 0 48 48"><circle cx="24" cy="20" r="12" fill="none" stroke="#2b50ff" stroke-width="5"/><circle cx="24" cy="37" r="6" fill="#f2c14e"/><circle cx="24" cy="37" r="2" fill="#b8861c"/></symbol>
+  <symbol id="i-tijera" viewBox="0 0 48 48"><g fill="none" stroke="#2a1418" stroke-width="3.2" stroke-linecap="round"><circle cx="14" cy="36" r="6"/><circle cx="34" cy="36" r="6"/><path d="M18 31 34 6M30 31 14 6"/></g></symbol>
+  <symbol id="i-peine" viewBox="0 0 48 48"><rect x="7" y="13" width="34" height="9" rx="2.5" fill="#d6457a"/><path d="M11 22v13M15.5 22v13M20 22v13M24.5 22v13M29 22v13M33.5 22v13M38 22v13" stroke="#d6457a" stroke-width="2.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-secador" viewBox="0 0 48 48"><path d="M7 13h22a11 11 0 0 1 0 22H7z" fill="#1aa39a"/><circle cx="29" cy="24" r="5" fill="#ffffff"/><path d="M15 35l4 10h7l-2.5-10z" fill="#13756f"/><path d="M3 17v14" stroke="#1aa39a" stroke-width="3.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-frasco" viewBox="0 0 48 48"><rect x="19" y="4" width="10" height="7" rx="1.5" fill="#2a1418"/><rect x="13" y="11" width="22" height="32" rx="6" fill="#f08bb0"/><rect x="17" y="20" width="14" height="12" rx="2" fill="#ffffff"/></symbol>
+  <symbol id="i-medialuna" viewBox="0 0 48 48"><path d="M4 31c7-15 31-22 40-3-8-3-14 2-20 5-6 3-13 2-20-2z" fill="#e3a857"/><path d="M14 22l3 8M22 19l2 9M31 18v9" stroke="#a9682a" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="i-flauta" viewBox="0 0 48 48"><g transform="rotate(-32 24 24)"><rect x="3" y="18" width="42" height="12" rx="6" fill="#d9a05b"/><path d="M12 20l4 8M20 20l4 8M28 20l4 8M36 20l3 6" stroke="#a9682a" stroke-width="2.2" stroke-linecap="round"/></g></symbol>
+  <symbol id="i-torta" viewBox="0 0 48 48"><rect x="8" y="26" width="32" height="15" rx="3" fill="#f3b1c5"/><rect x="8" y="22" width="32" height="7" rx="3" fill="#ffffff"/><rect x="22" y="11" width="4" height="11" fill="#2b50ff"/><path d="M24 3c3 3 3 6 0 7.5-3-1.5-3-4.5 0-7.5z" fill="#ff8a1f"/></symbol>
+  <symbol id="i-pizza" viewBox="0 0 48 48"><path d="M24 44 6 11c11-6 25-6 36 0z" fill="#f2c14e"/><path d="M6 11c11-6 25-6 36 0l-3 5c-9-5-21-5-30 0z" fill="#c98a3a"/><circle cx="20" cy="21" r="3" fill="#d43c3c"/><circle cx="29" cy="23" r="3" fill="#d43c3c"/><circle cx="24" cy="32" r="2.5" fill="#d43c3c"/></symbol>
+  <symbol id="i-llave" viewBox="0 0 48 48"><path d="M31 5a10 10 0 0 0-9 13L7 33a4.2 4.2 0 0 0 6 6l15-15a10 10 0 0 0 13-9l-6 2-4.5-4.5L33 6z" fill="#5c6370"/></symbol>
+  <symbol id="i-rueda" viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="#2a2c30"/><circle cx="24" cy="24" r="10" fill="#c9cdd3"/><circle cx="24" cy="24" r="3.5" fill="#2a2c30"/></symbol>
+  <symbol id="i-aceite" viewBox="0 0 48 48"><path d="M9 18h23l6 6v19H9z" fill="#f2c14e"/><path d="M32 18l8-8 3 3-6 7z" fill="#e0ad2a"/><rect x="13" y="26" width="15" height="10" fill="#18191b"/><rect x="15" y="11" width="9" height="7" fill="#d43c3c"/></symbol>
+  <symbol id="i-freno" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="#9aa1ab"/><circle cx="24" cy="24" r="6.5" fill="#5c6370"/><path d="M30 7a18 18 0 0 1 11 12l-8.5 2.5a9 9 0 0 0-5-6z" fill="#d43c3c"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.3 7-12a7 7 0 1 0-14 0c0 5.7 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="barra-top"></div>
+
+<header class="wrap top">
+  <a class="marca" href="#inicio" data-marca>Kan Web</a>
+  <nav aria-label="Secciones">
+    <a href="#probala">Probala</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#precio">Precio</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<main>
+<!-- ============ INICIO ============ -->
+<section class="wrap hero" id="inicio">
+  <h1 class="oracion" data-r-once>
+    <span class="l1"><span class="palabra">Tu</span>
+      <span class="tira shutter" data-ui role="img" aria-label="negocio: ejemplos de páginas web de un almacén, un pet shop, una peluquería y una panadería" id="tira">
+        <span class="sitio activo" data-ui style="--sb:#1f4d3a;--si:#ece9e2;--sa:#f2c14e">
+          <span class="s-ej">Ejemplo</span>
+          <span class="s-marca"><span class="s-logo"><svg aria-hidden="true"><use href="#i-pan"/></svg></span><span class="s-txt"><b class="s-nombre">Almacén Don Tito</b><span class="s-sub">Almacén de barrio · de 8 a 21 h</span><span class="s-btns"><span class="s-wpp">Pedir por WhatsApp</span><span class="s-ver">Ver productos</span></span></span></span>
+          <span class="s-prods"><span class="s-prod"><svg aria-hidden="true"><use href="#i-pan"/></svg><span class="s-pn">Pan del día</span><b class="s-pp">$ 90</b></span><span class="s-prod"><svg aria-hidden="true"><use href="#i-queso"/></svg><span class="s-pn">Queso colonia</span><b class="s-pp">$ 320</b></span><span class="s-prod"><svg aria-hidden="true"><use href="#i-yerba"/></svg><span class="s-pn">Yerba 1 kg</span><b class="s-pp">$ 260</b></span></span>
+        </span>
+        <span class="sitio" data-ui style="--sb:#ffd23f;--si:#18191b;--sa:#ffffff">
+          <span class="s-ej">Ejemplo</span>
+          <span class="s-marca"><span class="s-logo"><svg aria-hidden="true"><use href="#i-pata"/></svg></span><span class="s-txt"><b class="s-nombre">Patitas Pet Shop</b><span class="s-sub">Ración, accesorios y baños</span><span class="s-btns"><span class="s-wpp">Pedir por WhatsApp</span><span class="s-ver">Ver productos</span></span></span></span>
+          <span class="s-prods"><span class="s-prod"><svg aria-hidden="true"><use href="#i-hueso"/></svg><span class="s-pn">Huesitos</span><b class="s-pp">$ 180</b></span><span class="s-prod"><svg aria-hidden="true"><use href="#i-lata"/></svg><span class="s-pn">Lata gato</span><b class="s-pp">$ 95</b></span><span class="s-prod"><svg aria-hidden="true"><use href="#i-collar"/></svg><span class="s-pn">Collar</span><b class="s-pp">$ 250</b></span></span>
+        </span>
+        <span class="sitio" data-ui style="--sb:#f4b6c2;--si:#2a1418;--sa:#ffffff">
+          <span class="s-ej">Ejemplo</span>
+          <span class="s-marca"><span class="s-logo"><svg aria-hidden="true"><use href="#i-tijera"/></svg></span><span class="s-txt"><b class="s-nombre">Estudio Sol</b><span class="s-sub">Peluquería · turnos por WhatsApp</span><span class="s-btns"><span class="s-wpp">Reservar turno</span><span class="s-ver">Ver productos</span></span></span></span>
+          <span class="s-prods"><span class="s-prod"><svg aria-hidden="true"><use href="#i-tijera"/></svg><span class="s-pn">Corte</span><b class="s-pp">$ 600</b></span><span class="s-prod"><svg aria-hidden="true"><use href="#i-frasco"/></svg><span class="s-pn">Color</span><b class="s-pp">$ 1.400</b></span><span class="s-prod"><svg aria-hidden="true"><use href="#i-secador"/></svg><span class="s-pn">Brushing</span><b class="s-pp">$ 500</b></span></span>
+        </span>
+        <span class="sitio" data-ui style="--sb:#6b3e26;--si:#efe9e1;--sa:#e3a857">
+          <span class="s-ej">Ejemplo</span>
+          <span class="s-marca"><span class="s-logo"><svg aria-hidden="true"><use href="#i-medialuna"/></svg></span><span class="s-txt"><b class="s-nombre">Panadería La Espiga</b><span class="s-sub">Bizcochos calentitos desde las 7</span><span class="s-btns"><span class="s-wpp">Encargar por WhatsApp</span><span class="s-ver">Ver productos</span></span></span></span>
+          <span class="s-prods"><span class="s-prod"><svg aria-hidden="true"><use href="#i-medialuna"/></svg><span class="s-pn">Medialunas</span><b class="s-pp">$ 25</b></span><span class="s-prod"><svg aria-hidden="true"><use href="#i-flauta"/></svg><span class="s-pn">Flauta</span><b class="s-pp">$ 60</b></span><span class="s-prod"><svg aria-hidden="true"><use href="#i-torta"/></svg><span class="s-pn">Tortas</span><b class="s-pp">a pedido</b></span></span>
+        </span>
+      </span>
+    </span>
+    <span class="l2"><span class="palabra">en internet.</span></span>
+  </h1>
+
+  <div class="bajada">
+    <p data-r style="--i:3">Soy <strong data-nombre>Kan</strong> y hago páginas web para comercios de Uruguay, con tu WhatsApp a un toque.</p>
+    <a class="btn" data-r style="--i:4" data-wpp target="_blank" rel="noopener">Pedí tu página
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+
+<!-- Cintas -->
+<div class="cintas" aria-hidden="true">
+  <div class="cinta b"><div class="pista">
+    <span>Rápidas</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>Modernas</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>Fáciles de usar</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>A tu medida</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>Rápidas</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>Modernas</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>Fáciles de usar</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>A tu medida</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i>
+    <span>Rápidas</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>Modernas</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>Fáciles de usar</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>A tu medida</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>Rápidas</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>Modernas</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>Fáciles de usar</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>A tu medida</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i>
+  </div></div>
+  <div class="cinta a"><div class="pista">
+    <span>Páginas web</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>Diseño para celular</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>WhatsApp integrado</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>Mantenimiento</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>Hecho en Uruguay</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i>
+    <span>Páginas web</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>Diseño para celular</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>WhatsApp integrado</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>Mantenimiento</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i><span>Hecho en Uruguay</span><i><svg width="0.7em" height="0.7em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg></i>
+  </div></div>
+</div>
+
+<!-- ============ PROBALA (lo vivo) ============ -->
+<section class="wrap sec probala" id="probala">
+  <h2 class="pila"><span class="tenue" data-r>Tu nombre,</span><br><span data-r style="--i:1">tu página.</span></h2>
+
+  <div class="telefono" data-ui data-r style="--i:2" aria-label="Vista previa de tu página en un celular" role="img">
+    <div class="pantalla" data-ui>
+      <div class="p-cab" id="p-cab" style="background:#1f4d3a;color:#ece9e2">
+        <div class="p-nav"><span class="p-logo" id="p-logo" style="background:#f2c14e"><svg aria-hidden="true"><use href="#i-pan"/></svg></span><span>Productos</span><span>Contacto</span></div>
+        <div class="p-nombre" id="p-nombre">Tu Negocio</div>
+        <div class="p-tag" id="p-tag">Almacén de barrio · de 8 a 21 h</div>
+        <div class="p-wpp" id="p-wpp">Pedir por WhatsApp</div>
+      </div>
+      <div class="p-tit">Destacados</div>
+      <div class="p-grid" id="p-grid"></div>
+      <div class="p-horario" id="p-horario">Abierto hoy de 8 a 21 h</div>
+    </div>
+  </div>
+
+  <div class="control">
+    <div class="grid"><div>
+      <p data-r style="--i:3">Escribí el nombre de tu negocio y elegí el rubro: así se vería tu página en el celular de tus clientes. Si te gusta, me la pedís con un toque.</p>
+      <div class="campo" data-r style="--i:4">
+        <label for="nombre-negocio">Nombre de tu negocio</label>
+        <input id="nombre-negocio" type="text" maxlength="28" placeholder="Ej: Almacén Rosita" autocomplete="organization">
+      </div>
+      <fieldset class="rubros" data-r style="--i:5">
+        <legend>Rubro</legend>
+        <button type="button" class="rubro" data-rubro="almacen" aria-pressed="true">Almacén</button>
+        <button type="button" class="rubro" data-rubro="pet" aria-pressed="false">Pet shop</button>
+        <button type="button" class="rubro" data-rubro="pelu" aria-pressed="false">Peluquería</button>
+        <button type="button" class="rubro" data-rubro="pan" aria-pressed="false">Panadería</button>
+        <button type="button" class="rubro" data-rubro="taller" aria-pressed="false">Taller</button>
+      </fieldset>
+      <a class="btn" id="pedir-esta" data-r style="--i:6" data-wpp target="_blank" rel="noopener">Quiero esta página
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============ SERVICIOS ============ -->
+<section class="wrap sec servicios" id="servicios" style="padding-top:0">
+  <div class="grid intro"><h2 data-r>Todo lo que necesitás.</h2></div>
+
+  <div class="grid">
+    <div class="fila">
+      <div><h3 data-r>Tu vidriera, abierta siempre</h3><p data-r style="--i:1">Tus productos, precios, horarios y dirección en una página que se recuerda. La gente te encuentra aunque tu local esté cerrado.</p></div>
+      <div class="frag frag-1" data-r style="--i:2" data-ui role="img" aria-label="Ejemplo de página de un almacén con productos y horario">
+        <div class="f-vidriera"><div class="fv-top"><span class="fv-logo"><svg aria-hidden="true"><use href="#i-pan"/></svg></span><b>Almacén Rosita</b></div><span class="abierto">Abierto ahora</span><div class="fv-grid"><span class="fv-p"><svg aria-hidden="true"><use href="#i-botella"/></svg><span>Leche</span><b>$ 48</b></span><span class="fv-p"><svg aria-hidden="true"><use href="#i-pan"/></svg><span>Pan</span><b>$ 90</b></span><span class="fv-p"><svg aria-hidden="true"><use href="#i-yerba"/></svg><span>Yerba</span><b>$ 260</b></span><span class="fv-p"><svg aria-hidden="true"><use href="#i-queso"/></svg><span>Queso</span><b>$ 320</b></span></div></div>
+      </div>
+    </div>
+    <div class="fila">
+      <div><h3 data-r>Hecha para el celular</h3><p data-r style="--i:1">Tus clientes te buscan desde el teléfono. Tu página se ve perfecta en el celular, la tablet y la computadora.</p></div>
+      <div class="frag frag-2" data-r style="--i:2" data-ui role="img" aria-label="La misma página vista en computadora y en celular">
+        <div class="f-pantallas"><span class="pc"><span class="barra"><i></i><i></i><i></i></span><span class="mini-cab"><span class="mini-logo"><svg aria-hidden="true"><use href="#i-pata"/></svg></span><b>Patitas Pet Shop</b></span><span class="mini-prods"><span><svg aria-hidden="true"><use href="#i-hueso"/></svg></span><span><svg aria-hidden="true"><use href="#i-lata"/></svg></span><span><svg aria-hidden="true"><use href="#i-collar"/></svg></span></span></span><span class="cel"><span class="mini-cab"><span class="mini-logo"><svg aria-hidden="true"><use href="#i-pata"/></svg></span></span><b>Patitas</b><span class="mini-prods"><span><svg aria-hidden="true"><use href="#i-hueso"/></svg></span><span><svg aria-hidden="true"><use href="#i-lata"/></svg></span></span></span></div>
+      </div>
+    </div>
+    <div class="fila">
+      <div><h3 data-r>WhatsApp a un toque</h3><p data-r style="--i:1">Un botón y te escriben directo, con el mensaje ya armado. Sin formularios ni mails que se pierden.</p></div>
+      <div class="frag frag-3" data-r style="--i:2" data-ui role="img" aria-label="Conversación de WhatsApp con un cliente">
+        <div class="f-chat"><div class="fc-cab"><span class="fc-av"><svg aria-hidden="true"><use href="#i-tijera"/></svg></span><span><b>Estudio Sol</b><small>en línea</small></span></div><div class="fc-cuerpo"><p class="yo">Hola! Vi su página, ¿tienen turno el sábado?<small>10:42</small></p><p>¡Hola! Sí, a las 10 o a las 15.<small>10:43</small></p><p class="yo">A las 10 entonces<small>10:43</small></p></div></div>
+      </div>
+    </div>
+    <div class="fila">
+      <div><h3 data-r>Cambios cuando los necesites</h3><p data-r style="--i:1">Subió un precio, llegó algo nuevo o cambiaste el horario: me escribís y lo actualizo.</p></div>
+      <div class="frag frag-4" data-r style="--i:2" data-ui role="img" aria-label="Precios actualizados en una página">
+        <div class="f-cambio"><div class="fk-cab"><b>Precios</b><span class="ok">Guardado</span></div><div class="fila-precio"><svg aria-hidden="true"><use href="#i-medialuna"/></svg><span>Medialunas</span><span><s>$ 22</s> <span class="nuevo">$ 25</span></span></div><div class="fila-precio"><svg aria-hidden="true"><use href="#i-torta"/></svg><span>Tortas</span><span class="nuevo">Nuevo</span></div><div class="fila-precio"><svg aria-hidden="true"><use href="#i-flauta"/></svg><span>Domingos</span><span>8 a 13 h</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CÓMO TRABAJO ============ -->
+<section class="wrap sec proceso" id="proceso" style="padding-top:0">
+  <h2 data-r>Cuatro pasos y listo.</h2>
+  <ol class="pasos">
+    <li class="paso" data-r style="--i:0"><span class="n" aria-hidden="true">1</span><h3>Hablamos</h3><p>Me contás qué hace tu negocio y qué querés mostrar.</p></li>
+    <li class="paso" data-r style="--i:1"><span class="n" aria-hidden="true">2</span><h3>Diseño</h3><p>Te muestro una primera versión para que la veas.</p></li>
+    <li class="paso" data-r style="--i:2"><span class="n" aria-hidden="true">3</span><h3>Ajustes</h3><p>Cambiamos lo que haga falta según tu opinión.</p></li>
+    <li class="paso" data-r style="--i:3"><span class="n" aria-hidden="true">4</span><h3>Publicación</h3><p>Pongo tu página online y te paso el link.</p></li>
+  </ol>
+</section>
+
+<!-- ============ PRECIO ============ -->
+<section class="wrap sec precio on-field" id="precio">
+  <h2 data-r>El presupuesto<br>es <span class="bloque">gratis</span>.</h2>
+  <div class="pie-precio">
+    <p data-r style="--i:1">Sin compromiso: me contás qué necesitás y te paso un precio según el plan que elijas.</p>
+    <a class="btn" data-r style="--i:2" data-wpp data-msg="Hola! Quiero pedir un presupuesto para mi página web" target="_blank" rel="noopener">Pedir presupuesto</a>
+  </div>
+  <div class="planes">
+    <div class="plan" data-r style="--i:0">
+      <h3>Básico</h3><p class="p-precio">Precio a consultar</p>
+      <ul><li>Página de una sección</li><li>Info, horarios y ubicación</li><li>Botón de WhatsApp</li><li>Adaptada al celular</li></ul>
+      <a class="btn btn-claro" data-wpp data-msg="Hola! Me interesa el plan Básico" target="_blank" rel="noopener">Consultar <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="plan dest" data-r style="--i:1">
+      <div class="plan-cab"><h3>Negocio</h3><span class="badge">Más elegido</span></div><p class="p-precio">Precio a consultar</p>
+      <ul><li>Varias secciones</li><li>Catálogo de productos o servicios</li><li>Galería de fotos</li><li>Mapa y redes sociales</li></ul>
+      <a class="btn" data-wpp data-msg="Hola! Me interesa el plan Negocio" target="_blank" rel="noopener">Consultar <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="plan" data-r style="--i:2">
+      <h3>Mantenimiento</h3><p class="p-precio">Precio a consultar</p>
+      <ul><li>Cambios de precios y fotos</li><li>Nuevas secciones</li><li>Ayuda cuando la necesites</li></ul>
+      <a class="btn btn-claro" data-wpp data-msg="Hola! Me interesa el mantenimiento de mi página" target="_blank" rel="noopener">Consultar <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOBRE MÍ ============ -->
+<section class="wrap sec sobre" id="sobre-mi">
+  <div class="texto">
+    <h2 data-r>Quién hace tu página</h2>
+    <div class="cuerpo">
+      <div class="capitular" data-r aria-hidden="true"><span data-inicial>K</span></div>
+      <div>
+      <p class="bio" data-r style="--i:1">Soy <strong data-nombre>Kan</strong>, estudio programación y armo páginas web para comercios de barrio: almacenes, pet shops, peluquerías, panaderías y talleres. Me gusta que cada página se parezca a su negocio y no a una plantilla.</p>
+      <p class="bio" data-r style="--i:2">Trabajo cerca tuyo: hablamos por WhatsApp, te muestro cada avance y ajustamos hasta que la página se sienta tuya.</p>
+      </div>
+    </div>
+  </div>
+  <ul class="fuertes" aria-label="Mis puntos fuertes">
+    <li class="fuerte f1" data-r style="--i:0"><span class="f-ic"><svg aria-hidden="true"><use href="#i-pin"/></svg></span><b>Hecho en Uruguay</b><span>Páginas para comercios de acá, con las palabras que usan tus clientes.</span></li>
+    <li class="fuerte f2" data-r style="--i:1"><span class="f-ic"><svg aria-hidden="true"><use href="#i-chat"/></svg></span><b>Todo por WhatsApp</b><span>Hablamos directo y te muestro cada avance. Sin vueltas ni formularios.</span></li>
+    <li class="fuerte f3" data-r style="--i:2"><span class="f-ic"><svg aria-hidden="true"><use href="#i-code"/></svg></span><b>HTML, CSS y JavaScript</b><span>Páginas hechas a mano, rápidas y sin plantillas.</span></li>
+  </ul>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section class="wrap sec contacto" id="contacto" style="padding-top:0">
+  <div class="grid">
+    <h2 data-r>Hablemos</h2>
+    <p class="frase" data-r style="--i:1">¿Tenés un almacén, un pet shop, una peluquería o un taller? Escribime y armamos tu página.</p>
+    <div class="sello" data-r style="--i:2" aria-hidden="true">
+      <svg viewBox="0 0 200 200">
+        <defs><path id="circulo" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+        <text font-family="Libre Franklin, Arial, sans-serif" font-weight="700" font-size="16" fill="#eff0f1"><textPath href="#circulo" textLength="486" lengthAdjust="spacing">PÁGINAS WEB · URUGUAY · PÁGINAS WEB · URUGUAY ·</textPath></text>
+      </svg>
+      <div class="centro"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#18191b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></div>
+    </div>
+    <div class="vias" data-r style="--i:3">
+      <h3>¿Cómo preferís?</h3>
+      <a class="link" data-wpp target="_blank" rel="noopener">WhatsApp <span data-telefono>092 240 211</span></a>
+      <a class="link" data-mail data-email>kannnnzzzi@gmail.com</a>
+      <small>Uruguay · también por mail si te queda más cómodo</small>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ PIE ============ -->
+<footer class="wrap pie">
+  <div class="arriba">
+    <p><b data-marca>Kan Web</b> · Páginas web para comercios de barrio en Uruguay.</p>
+    <a class="link" href="#inicio">Volver arriba</a>
+  </div>
+  <a class="mail" data-mail data-email>kannnnzzzi@gmail.com</a>
+  <div class="gigante" aria-hidden="true" data-nombre>Kan</div>
+  <div class="abajo"><a class="link" data-wpp target="_blank" rel="noopener">WhatsApp</a><span>Hecho a mano</span><span>Uruguay · <span id="anio">2026</span></span></div>
+</footer>
+
+<script>
+(() => {
+  const d = MIS_DATOS;
+  const wpp = (m) => `https://wa.me/${d.whatsapp}?text=${encodeURIComponent(m || "Hola! Vi tu página y quiero consultar por una página web")}`;
+  const $$ = (s) => document.querySelectorAll(s);
+
+  // ---- Tus datos en toda la página ----
+  $$("[data-nombre]").forEach((e) => (e.textContent = d.nombre));
+  $$("[data-marca]").forEach((e) => (e.textContent = d.marca));
+  $$("[data-inicial]").forEach((e) => (e.textContent = d.nombre.charAt(0).toUpperCase()));
+  $$("[data-telefono]").forEach((e) => (e.textContent = d.telefono));
+  $$("[data-email]").forEach((e) => (e.textContent = d.email));
+  $$("[data-mail]").forEach((e) => (e.href = "mailto:" + d.email));
+  $$("[data-wpp]").forEach((e) => (e.href = wpp(e.dataset.msg)));
+  document.getElementById("anio").textContent = new Date().getFullYear();
+
+  // ---- La tira del título: los sitios de ejemplo se turnan ----
+  const sitios = [...$$("#tira .sitio")];
+  let k = 0;
+  const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  setInterval(() => {
+    if (document.hidden) return;
+    sitios[k].classList.remove("activo");
+    k = (k + 1) % sitios.length;
+    sitios[k].classList.add("activo");
+  }, quieto ? 5000 : 3200);
+
+  // ---- Probala: tu nombre y tu rubro en la vista previa ----
+  const RUBROS = {
+    almacen: { label: "Almacén", bg: "#1f4d3a", ink: "#ece9e2", acc: "#f2c14e", logo: "pan", tag: "Almacén de barrio · de 8 a 21 h", hor: "Abierto hoy de 8 a 21 h", cta: "Pedir por WhatsApp",
+      items: [["pan", "Pan del día", "$ 90"], ["queso", "Queso colonia", "$ 320"], ["yerba", "Yerba 1 kg", "$ 260"], ["botella", "Bebidas frías", "desde $ 70"]] },
+    pet: { label: "Pet shop", bg: "#ffd23f", ink: "#18191b", acc: "#ffffff", logo: "pata", tag: "Ración, accesorios y baños", hor: "Envíos en el barrio de lunes a sábado", cta: "Pedir por WhatsApp",
+      items: [["hueso", "Huesitos", "$ 180"], ["lata", "Lata para gato", "$ 95"], ["collar", "Collares", "desde $ 250"], ["pata", "Baño y corte", "$ 650"]] },
+    pelu: { label: "Peluquería", bg: "#f4b6c2", ink: "#2a1418", acc: "#ffffff", logo: "tijera", tag: "Peluquería · turnos por WhatsApp", hor: "Martes a sábado de 10 a 19 h", cta: "Reservar turno",
+      items: [["tijera", "Corte", "$ 600"], ["frasco", "Color", "desde $ 1.400"], ["secador", "Brushing", "$ 500"], ["peine", "Peinados", "$ 900"]] },
+    pan: { label: "Panadería", bg: "#6b3e26", ink: "#efe9e1", acc: "#e3a857", logo: "medialuna", tag: "Bizcochos calentitos desde las 7", hor: "Todos los días de 7 a 20 h", cta: "Encargar por WhatsApp",
+      items: [["medialuna", "Medialunas", "$ 25"], ["flauta", "Flauta", "$ 60"], ["torta", "Tortas", "a pedido"], ["pizza", "Pizza", "$ 70"]] },
+    taller: { label: "Taller", bg: "#2b50ff", ink: "#ffffff", acc: "#ffffff", logo: "llave", tag: "Taller mecánico · presupuestos sin cargo", hor: "Lunes a viernes de 8 a 18 h", cta: "Pedir presupuesto",
+      items: [["aceite", "Cambio de aceite", "desde $ 1.900"], ["freno", "Frenos", "a presupuesto"], ["rueda", "Alineación", "$ 900"], ["llave", "Diagnóstico", "sin cargo"]] }
+  };
+  let rubro = "almacen";
+  const input = document.getElementById("nombre-negocio");
+  const cab = document.getElementById("p-cab"), nom = document.getElementById("p-nombre"), tag = document.getElementById("p-tag");
+  const grilla = document.getElementById("p-grid"), hor = document.getElementById("p-horario"), cta = document.getElementById("p-wpp");
+  const logo = document.getElementById("p-logo");
+  const pedir = document.getElementById("pedir-esta");
+  const NS = "http://www.w3.org/2000/svg";
+  const icono = (id) => {
+    const svg = document.createElementNS(NS, "svg"); svg.setAttribute("aria-hidden", "true");
+    const use = document.createElementNS(NS, "use"); use.setAttribute("href", "#i-" + id);
+    svg.append(use); return svg;
+  };
+
+  function pintar(animar) {
+    const r = RUBROS[rubro];
+    const nombre = input.value.trim() || "Tu Negocio";
+    cab.style.backgroundColor = r.bg; cab.style.color = r.ink;
+    logo.style.backgroundColor = r.acc; logo.replaceChildren(icono(r.logo));
+    nom.textContent = nombre; tag.textContent = r.tag; hor.textContent = r.hor; cta.textContent = r.cta;
+    grilla.replaceChildren(...r.items.map(([ic, a, b]) => {
+      const card = document.createElement("div"); card.className = "p-card";
+      const n = document.createElement("span"); n.textContent = a;
+      const p = document.createElement("b"); p.textContent = b;
+      card.append(icono(ic), n, p); return card;
+    }));
+    if (animar && !quieto) { grilla.classList.remove("cambia"); void grilla.offsetWidth; grilla.classList.add("cambia"); }
+    pedir.href = wpp(`Hola! Quiero una página web como la del ejemplo para mi negocio: ${input.value.trim() || "(mi negocio)"} (${r.label}).`);
+  }
+  input.addEventListener("input", () => pintar(false));
+  $$(".rubro").forEach((b) => b.addEventListener("click", () => {
+    rubro = b.dataset.rubro;
+    $$(".rubro").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    pintar(true);
+  }));
+  pintar(false);
+
+  // ---- Entradas al hacer scroll (una vez) ----
+  const io = new IntersectionObserver((es) => {
+    for (const e of es) if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+  }, { rootMargin: "0px 0px -10% 0px", threshold: 0.08 });
+  $$("[data-r]").forEach((el) => io.observe(el));
+  requestAnimationFrame(() => {
+    document.querySelector(".oracion").classList.add("in");
+    document.getElementById("tira").classList.add("in");
+  });
+
+  // ---- Cursor: un círculo que crece sobre botones y links ----
+  const cur = document.getElementById("cursor");
+  if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    addEventListener("mousemove", (e) => {
+      cur.classList.add("on");
+      cur.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+    }, { passive: true });
+    document.addEventListener("mouseover", (e) => cur.classList.toggle("grande", !!e.target.closest("a, button, input")));
+    document.addEventListener("mouseleave", () => cur.classList.remove("on"));
+  }
+})();
+</script>
+</body>
+</html>
